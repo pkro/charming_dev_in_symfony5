@@ -12,7 +12,7 @@ class QuestionController extends AbstractController
      * @Route("/")
      */
     public function homepage() {
-        return new Response("Hey hey");
+        return $this->render('question/homepage.html.twig');
     }
     
     /**
@@ -24,6 +24,7 @@ class QuestionController extends AbstractController
             'answer b',
             'answer c'
         ];
+    
         return $this->render('question/show.html.twig', [
             'question' => str_replace('-', ' ', $slug),
             'answers' => $answers

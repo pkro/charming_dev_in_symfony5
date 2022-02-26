@@ -162,4 +162,23 @@ templates/question/show.html.twig:
 
 [Twig documentation and quick reference](https://twig.symfony.com/doc/3.x/)
 
-## Symfony profiler
+## Symfony profiler and debugging
+
+Installation: `composer require profiler --dev`
+
+This adds a profler bar at the bottom of the page like in zend; Click on any of the clickable areas to expand. It also adds a `dump` and `dd` (dump and die) function.
+
+Another bundle for debugging is debug which also installs monolog: `composer require debug`, which installs `symfony/debug-pack`, which is basically a meta package of other packages in a [composer.json](https://github.com/symfony/debug-pack/blob/main/composer.json) file indicating which bundle of libraries will be installed.
+
+This turns on logging and puts the output of `dump` in the debug toolbar instead of the page. It also adds a `server:dump` console command to dump output in the console.
+
+## Assets (CSS, images etc)
+
+Assets can be put in the public directory like in any static site. The `asset` function (`composer require symfony/asset`) can (but doesn't have to be) used for this, which provides autmoatic path updates and prefixes from config files:
+
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+Another option is to use webpack encore with minification, sass and react support.
+
+
+
