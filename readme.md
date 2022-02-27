@@ -234,4 +234,34 @@ We can indicate which values are accepted with regular expressions:
 
 We could do the same with `{id<\d+>}`, but we won't as if something invalid is put there, the DB will simply not find it (and the DB layer will also take care of injection attacks etc.).
 
-## Service Objects
+## Service Objects (=Services)
+
+Definition: Just objects that provide services such as rendering, logging etc. Everything in symfony is done by a service. `$this->render` is just a shortcut for the render method of the twig service.
+
+`php bin/console debug:autowiring` gives a list of all (currently) available service objects in the app, add a substring as an argument to filter.
+
+Example: adding a logger is just adding a parameter to a controller method:
+
+    public function commentVote($id, $direction, LoggerInterface $logger) {
+            $logger->info('Voting ' . $direction);
+            // ...
+
+Another example (twig service):
+
+    public function homepage(Environment $twigEnvironment) {
+        $html = $twigEnvironment->render('question/homepage.html.twig');
+        return new Response($html);
+        //same as return $this->render('question/homepage.html.twig');
+    }
+
+## Webpack encore (intro)
+
+Layer on top of webpack
+
+[node](https://nodejs.org/en/download/) and [yarn](https://classic.yarnpkg.com/lang/en/docs/install/) must be installed.
+
+Run `composer require "encore:^1.8"` (leave version out for latest version, this is to be compatible with the course) to install the webpack-encore-bundle, which adds a webpack.config.js and a package.json and adds `node_modules` etc. to the `.gitignore` file.
+
+Now run `yarn install` to install the JS libriaries from `package.json`
+
+
