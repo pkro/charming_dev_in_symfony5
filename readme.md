@@ -264,4 +264,24 @@ Run `composer require "encore:^1.8"` (leave version out for latest version, this
 
 Now run `yarn install` to install the JS libriaries from `package.json`
 
+This adds an "assets" directory in the project root with css and js examples.
 
+Running `yarn watch` watches for changes there, runs webpack and adds them to the `public/build` directory. `yarn build` also minifies them. See `package.json` for available commands.
+
+The scripts can be added now to the twig temples using `{{ encore_entry_link_tags('app') }}` for the css and `{{ encore_entry_script_tags('app') }}` for the javascript.
+
+We can now move the stuff from the old css files to the `assets/styles/app.css` and delete the old one in `public`, the same for the javascript.
+
+Using encore enables us to install and use libraries using `yarn add [package name]` and import them in JS scripts.
+
+Example (replace CDN include by installing it with yarn)
+
+`yarn add jquery`
+
+assets/app.js
+
+    import $ from 'jquery';
+
+`yarn watch` will automatically update / recompile the javascript.
+
+The same can be done with the bootstrap include (`yarn add bootstrap`, then add `@import "~bootstrap";` to the top of app.css).
